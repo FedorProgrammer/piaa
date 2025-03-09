@@ -124,3 +124,5 @@ if __name__ == "__main__":
         main()
     except ValueError as e:
         print(f"Error: {e}")
+    except FileNotFoundError as e:
+        print(f"File {_DEFAULT_JSON_PATH} not found")
