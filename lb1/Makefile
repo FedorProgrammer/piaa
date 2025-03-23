@@ -45,11 +45,11 @@ run: $(EXEC)
 	./$(EXEC) solve
 
 run_benchmark: $(EXEC)
-	touch $(BENCH_DIR)/$(BENCH_FILE)
+	$(shell touch $(BENCH_DIR)/$(BENCH_FILE))
 	./$(EXEC) benchmark
 
 run_visualize: $(EXEC)
-	touch $(BENCH_DIR)/$(BENCH_FILE)
+	$(shell touch $(BENCH_DIR)/$(BENCH_FILE))
 	./$(EXEC) visualize
 
 run_steps: $(EXEC)

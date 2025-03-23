@@ -79,7 +79,8 @@ void _drawSquare(const Square& square, colors::color_t fillCollor,
 
 std::string visualizeTiling(const Board& board, const std::string& title,
                             const std::string& filename,
-                            const std::string& output_dir) {
+                            const std::string& output_dir,
+                            const std::string& additional) {
   matplot::figure_handle figure = matplot::figure(true);
   figure->size(1200, 1200);
   figure->position({0, 0, 1200, 1200});
@@ -87,6 +88,10 @@ std::string visualizeTiling(const Board& board, const std::string& title,
 
   details::_configureAxes(figure->current_axes(), board.getSize(),
                           board.getSize());
+
+  if (additional.length() > 0) {
+    figure->current_axes()->title(additional);
+  }
 
   std::vector<Square> squares = board.getSquares();
   for (size_t i = 0; i < squares.size(); ++i) {
@@ -143,6 +148,7 @@ std::string visualizeSteps(const std::vector<Board>& steps,
 
   std::vector<std::string> frame_paths;
   std::string boardSize = std::to_string(steps[steps.size() - 1].getSize());
+  int bestCount = INT32_MAX;
 
   for (size_t i = 0; i < steps.size(); i++) {
     std::string filename = "frame_" +
@@ -152,7 +158,24 @@ std::string visualizeSteps(const std::vector<Board>& steps,
         "step " + std::to_string(i) + "/" + std::to_string(steps.size() - 1);
 
     Board step = steps[i];
-    std::string frame_path = visualizeTiling(step, title, filename, _TEMP_DIR);
+
+    if (step.getEmptyCells() == 0) {
+      if (step.getSquaresCount() <= bestCount) {
+        bestCount = step.getSquaresCount();
+      }
+    }
+
+    std::string additional =
+        "current count: " + std::to_string(step.getSquaresCount()) + " " +
+        "current best: ";
+
+    if (bestCount != INT32_MAX)
+      additional += std::to_string(bestCount);
+    else
+      additional += "NS";
+
+    std::string frame_path =
+        visualizeTiling(step, title, filename, _TEMP_DIR, additional);
     frame_paths.push_back(frame_path);
   }
 

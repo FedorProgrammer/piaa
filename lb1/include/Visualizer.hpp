@@ -10,7 +10,8 @@ namespace visualize {
 
 std::string visualizeTiling(const Board& board, const std::string& title,
                             const std::string& filename,
-                            const std::string& output_dir);
+                            const std::string& output_dir,
+                            const std::string& additional="");
 std::string visualizeExecutionTimes(const std::vector<int>& sizes,
                                     const std::vector<double>& times,
                                     const std::string& filename,
