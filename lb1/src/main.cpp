@@ -68,7 +68,7 @@ void visualizeMode() {
     times.push_back(result["time"].get<double>());
 
     std::string title =
-        "Замощение квадрата со стороной: " + std::to_string(board.getSize()) +
+        "Замощение квадрата со сторонами: " + std::to_string(board.getSize()) +
         "x" + std::to_string(board.getSize());
     std::string filename = "tiling_" + std::to_string(board.getSize()) + ".png";
 

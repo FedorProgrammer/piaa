@@ -11,7 +11,7 @@
 #include "../include/Square.hpp"
 
 #define _TEMP_DIR "temp/"
-#define _DELAY 100
+#define _PLOT_SIZE 700
 
 namespace visualize {
 
@@ -19,7 +19,7 @@ namespace colors {
 
 using color_t = std::array<float, 3>;
 
-const float _alpha = 0.5f;
+const float _alpha = 0.45f;
 const float _thickness = 0.5f;
 
 const color_t _red = {1.0f, 0.0f, 0.0f};
@@ -82,8 +82,8 @@ std::string visualizeTiling(const Board& board, const std::string& title,
                             const std::string& output_dir,
                             const std::string& additional) {
   matplot::figure_handle figure = matplot::figure(true);
-  figure->size(1200, 1200);
-  figure->position({0, 0, 1200, 1200});
+  figure->size(_PLOT_SIZE, _PLOT_SIZE);
+  figure->position({0, 0, _PLOT_SIZE, _PLOT_SIZE});
   figure->title(title);
 
   details::_configureAxes(figure->current_axes(), board.getSize(),
@@ -117,8 +117,8 @@ std::string visualizeExecutionTimes(const std::vector<int>& sizes,
                                     const std::string& filename,
                                     const std::string& output_dir) {
   matplot::figure_handle figure = matplot::figure(true);
-  figure->size(1200, 1200);
-  figure->position({0, 0, 1200, 1200});
+  figure->size(_PLOT_SIZE * 1.25, _PLOT_SIZE);
+  figure->position({0, 0, 1200, 800});
 
   std::vector<double> sizes_double(sizes.begin(), sizes.end());
 

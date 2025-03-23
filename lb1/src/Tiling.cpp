@@ -87,8 +87,10 @@ std::pair<Board, std::vector<Board>> backtrack(Board startBoard, bool record) {
         }
 
         stack.push(newBoard);
+        if (record) steps.push_back(newBoard);
       }
     }
+    steps.pop_back();
   }
 
   return {bestBoard, steps};
@@ -111,4 +113,5 @@ std::pair<Board, std::vector<Board>> solve(int size, bool record) {
 
   return {board, steps};
 }
+
 }  // namespace tiling
