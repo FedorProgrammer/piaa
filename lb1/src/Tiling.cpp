@@ -2,11 +2,15 @@
 
 #include <cmath>
 #include <cstdint>
+#include <set>
 #include <stack>
-#include <utility>
 
 #include "../include/Board.hpp"
 #include "../include/Square.hpp"
+
+namespace tiling {
+
+namespace details {
 
 std::set<int> baseFactorize(int n) {
   std::set<int> factors;
@@ -24,15 +28,39 @@ std::set<int> baseFactorize(int n) {
   return factors;
 }
 
-Board backtrack(Board startBoard) {
+Board initPrimeBoard(int size) {
+  Board initBoard(size);
+
+  int centralSize = (size + 1) / 2;
+  int sideSize = size / 2;
+
+  Square central({0, 0}, centralSize);
+  Square rightSide({centralSize, 0}, sideSize);
+  Square leftSide({0, centralSize}, sideSize);
+
+  initBoard.addSquare(central);
+  initBoard.addSquare(rightSide);
+  initBoard.addSquare(leftSide);
+  initBoard.setStartCoordinates(centralSize, sideSize);
+
+  return initBoard;
+}
+
+}  // namespace details
+
+std::pair<Board, std::vector<Board>> backtrack(Board startBoard, bool record) {
   int minimalCount = INT32_MAX;
   Board bestBoard(startBoard.getSize());
+
   std::stack<Board> stack;
   stack.push(startBoard);
+
+  std::vector<Board> steps;
 
   while (!stack.empty()) {
     Board board = stack.top();
     stack.pop();
+    if (record) steps.push_back(board);
 
     if (board.getSquaresCount() >= minimalCount) {
       continue;
@@ -63,35 +91,24 @@ Board backtrack(Board startBoard) {
     }
   }
 
-  return bestBoard;
+  return {bestBoard, steps};
 }
 
-Board initPrimeBoard(int size) {
-  Board initBoard(size);
-
-  int centralSize = (size + 1) / 2;
-  int sideSize = size / 2;
-
-  Square central({0, 0}, centralSize);
-  Square rightSide({centralSize, 0}, sideSize);
-  Square leftSide({0, centralSize}, sideSize);
-
-  initBoard.addSquare(central);
-  initBoard.addSquare(rightSide);
-  initBoard.addSquare(leftSide);
-  initBoard.setStartCoordinates(centralSize, sideSize);
-
-  return initBoard;
-}
-
-Board solve(int size) {
-  std::set<int> factors = baseFactorize(size);
+std::pair<Board, std::vector<Board>> solve(int size, bool record) {
+  std::set<int> factors = details::baseFactorize(size);
   int minimal = *factors.begin();
   int coef = size / minimal;
 
-  Board startBoard = initPrimeBoard(minimal);
-  Board board = backtrack(startBoard);
+  Board startBoard = details::initPrimeBoard(minimal);
+  auto [board, steps] = backtrack(startBoard, record);
   board.scale(coef);
 
-  return board;
+  if (record) {
+    for (Board& step : steps) {
+      step.scale(coef);
+    }
+  }
+
+  return {board, steps};
 }
+}  // namespace tiling

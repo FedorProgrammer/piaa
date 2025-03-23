@@ -1,55 +1,58 @@
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall -Wextra -pedantic
 
+MATPLOT_FLAGS = -lmatplot
+VISUAL_FLAGS = $(MATPLOT_FLAGS)
+
 SRC_DIR = src
 INCLUDE_DIR = include
-BENCH_DIR = benchmarks
 OBJ_DIR = obj
-VISUAL_DIR = visual
+BENCH_DIR = benchmark
+VISUAL_DIR = visual-output
 
-COMMON_SRC = $(filter-out $(SRC_DIR)/main.cpp, $(wildcard $(SRC_DIR)/*.cpp))
+INCLUDES = -I$(INCLUDE_DIR)
 
-COMMON_OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(COMMON_SRC:.cpp=.o)))
-MAIN_OBJ = $(OBJ_DIR)/main.o $(COMMON_OBJ)
-BENCH_OBJ = $(OBJ_DIR)/benchmarks.o $(COMMON_OBJ)
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+OBJ_FILES = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC_FILES:.cpp=.o)))
+BENCH_FILE = benchmark.json
 
-MAIN_EXEC = $(OBJ_DIR)/tile
-BENCH_EXEC = $(OBJ_DIR)/bench_squares
-
-INCLUDES = -I.
+EXEC = $(OBJ_DIR)/tile
 
 $(shell mkdir -p $(OBJ_DIR))
-$(shell mkdir -p $(VISUAL_DIR)/output)
+$(shell mkdir -p $(BENCH_DIR))
+$(shell mkdir -p $(VISUAL_DIR))
 
-all: $(MAIN_EXEC) $(BENCH_EXEC)
+all: $(EXEC)
 
-$(MAIN_EXEC): $(MAIN_OBJ)
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $^
-
-$(BENCH_EXEC): $(BENCH_OBJ)
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $^
-
-$(OBJ_DIR)/benchmarks.o: $(BENCH_DIR)/benchmarks.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+$(EXEC): $(OBJ_FILES)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $^ $(VISUAL_FLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR)/*.o $(EXEC)
 
 clean_visuals:
-	rm -rf $(VISUAL_DIR)/output
+	rm -rf $(VISUAL_DIR)/*
 
-deep_clean: clean clean_visuals
+clean_benchmarks:
+	rm -rf $(BENCH_DIR)/*
 
-run: $(MAIN_EXEC)
-	./$(MAIN_EXEC)
+deep_clean: clean clean_visuals clean_benchmarks
 
-benchmark: $(BENCH_EXEC)
-	./$(BENCH_EXEC)
+run: $(EXEC)
+	./$(EXEC) solve
 
-visualize: 
-	python3 $(VISUAL_DIR)/visual.py results.json
+run_benchmark: $(EXEC)
+	touch $(BENCH_DIR)/$(BENCH_FILE)
+	./$(EXEC) benchmark
 
-.PHONY: all clean clean_visuals deep_clean run benchmark visualize
+run_visualize: $(EXEC)
+	touch $(BENCH_DIR)/$(BENCH_FILE)
+	./$(EXEC) visualize
+
+run_steps: $(EXEC)
+	./$(EXEC) steps
+
+.PHONY: all clean clean_visuals clean_benchmarks deep_clean run run_benchmark run_visualize run_steps
