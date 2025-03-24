@@ -11,7 +11,7 @@
 #include "../include/Square.hpp"
 
 #define _TEMP_DIR "temp/"
-#define _PLOT_SIZE 700
+#define _PLOT_SIZE 600
 
 namespace visualize {
 
