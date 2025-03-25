@@ -3,8 +3,8 @@
 #include <matplot/matplot.h>
 
 #include <array>
+#include <cstdlib>
 #include <filesystem>
-#include <vector>
 
 #include "../include/Board.hpp"
 #include "../include/Deserializer.hpp"
