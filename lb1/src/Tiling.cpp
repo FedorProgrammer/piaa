@@ -90,7 +90,7 @@ std::pair<Board, std::vector<Board>> backtrack(Board startBoard, bool record) {
         if (record) steps.push_back(newBoard);
       }
     }
-    steps.pop_back();
+    if (record) steps.pop_back();
   }
 
   return {bestBoard, steps};
