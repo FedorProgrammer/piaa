@@ -189,7 +189,7 @@ std::string visualizeSteps(const std::vector<Board>& steps,
   };
 
   std::string gifCommand = "ffmpeg -y -loglevel quiet -framerate " +
-                           std::to_string(fps) + " -start_number 0 -i " +
+                           std::to_string(fps) + " -i " +
                            std::string(_TEMP_DIR) + "frame_%010d.png " +
                            getPath(output_dir, ouput_filename, ".gif");
 
