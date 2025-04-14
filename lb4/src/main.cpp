@@ -25,7 +25,7 @@ void cycleMode() {
   std::string a, b;
   std::cin >> a >> b;
 
-  int pos = kmp::is_cycle_shift(a, b);
+  int pos = kmp::is_cycle_shift(b, a);
 
   std::cout << pos << std::endl;
 }

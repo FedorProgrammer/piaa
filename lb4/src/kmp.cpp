@@ -19,7 +19,7 @@ std::vector<int> prefix_function(const std::string& text, bool record) {
     std::cout << std::endl;
     std::cout << "==========================" << std::endl;
     std::cout << "Свойства префикс-функции: " << std::endl;
-    std::cout << "Пусть P(text, i) = k, где: P() - префикс функция, text - "
+    std::cout << "Пусть P(text, i) = k, где: P() - префикс-функция, text - "
                  "обрабатываемый текст, i - максимальный индекс в text (срез)"
               << std::endl;
 
@@ -205,12 +205,12 @@ std::vector<int> find(const std::string& text, const std::string& pattern,
   return matches;
 }
 
-int is_cycle_shift(const std::string& text, const std::string& shift) {
-  if (text.length() != shift.length()) {
+int is_cycle_shift(const std::string& a, const std::string& b) {
+  if (a.length() != b.length()) {
     return -1;
   }
 
-  std::vector<int> matched = find(shift + shift, text, false);
+  std::vector<int> matched = find(b + b, a, false);
 
   return matched[0];
 }
