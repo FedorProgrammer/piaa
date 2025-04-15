@@ -210,7 +210,7 @@ int is_cycle_shift(const std::string& a, const std::string& b) {
     return -1;
   }
 
-  std::vector<int> matched = find(b + b, a, false);
+  std::vector<int> matched = find(a + a, b, false);
 
   return matched[0];
 }
