@@ -43,6 +43,15 @@ std::vector<int> prefix_function(const std::string& text, bool record) {
     std::cout << std::endl;
   }
 
+  if (record) {
+    std::cout << "--------------------------" << std::endl;
+    std::cout << "Для подстроки: [" << text.substr(0, 1) << "]" << std::endl;
+    std::cout
+        << "Значение префикс функции будет равно 0: нет собственного префикса"
+        << std::endl;
+    std::cout << "--------------------------" << std::endl;
+  }
+
   for (int i = 1; i < n; i++) {
     int j = prefix[i - 1];
     if (record) {
