@@ -104,6 +104,8 @@ matrix_t getMatrix(const std::string& s1, const std::string& s2,
           std::cout << std::endl;
           std::cout << "--------------------------" << std::endl;
 
+          std::cout << "i-1 = [" << i - 1 << "]" << std::endl;
+          std::cout << "j-1 = [" << j - 1 << "]" << std::endl;
           std::cout << "s1[i-1] != s2[j-1]: " << std::endl;
           std::cout << "[s1]: [" << s1.substr(0, i - 1) << details::red
                     << s1[i - 1] << details::reset << s1.substr(i) << "]"
@@ -130,6 +132,8 @@ matrix_t getMatrix(const std::string& s1, const std::string& s2,
           std::cout << std::endl;
           std::cout << "--------------------------" << std::endl;
 
+          std::cout << "i-1 = [" << i - 1 << "]" << std::endl;
+          std::cout << "j-1 = [" << j - 1 << "]" << std::endl;
           std::cout << "s1[i-1] == s2[j-1]: " << std::endl;
           std::cout << "[s1]: [" << s1.substr(0, i - 1) << details::red
                     << s1[i - 1] << details::reset << s1.substr(i) << "]"
@@ -190,7 +194,8 @@ std::string getPrescription(const matrix_t& matrix, const std::string& s1,
         std::cout << "--------------------------" << std::endl;
 
         std::cout << "Символы совпадают: " << s1[i - 1] << std::endl;
-        std::cout << "i = [" << i << "]" << ", j = [" << j << "]" << std::endl;
+        std::cout << "i-1 = [" << i - 1 << "]" << std::endl;
+        std::cout << "j-1 = [" << j - 1 << "]" << std::endl;
         std::cout << "Действие: M" << std::endl;
 
         std::cout << "--------------------------" << std::endl;
@@ -207,7 +212,8 @@ std::string getPrescription(const matrix_t& matrix, const std::string& s1,
         std::cout << "--------------------------" << std::endl;
 
         std::cout << "Необходимо вставить символ: " << s2[j - 1] << std::endl;
-        std::cout << "i = [" << i << "]" << ", j = [" << j << "]" << std::endl;
+        std::cout << "i-1 = [" << i - 1 << "]" << std::endl;
+        std::cout << "j-1 = [" << j - 1 << "]" << std::endl;
         std::cout << "Действие: I" << std::endl;
 
         std::cout << "--------------------------" << std::endl;
@@ -223,7 +229,8 @@ std::string getPrescription(const matrix_t& matrix, const std::string& s1,
         std::cout << "--------------------------" << std::endl;
 
         std::cout << "Необходимо удалить символ: " << s1[i - 1] << std::endl;
-        std::cout << "i = [" << i << "]" << ", j = [" << j << "]" << std::endl;
+        std::cout << "i-1 = [" << i - 1 << "]" << std::endl;
+        std::cout << "j-1 = [" << j - 1 << "]" << std::endl;
         std::cout << "Действие: D" << std::endl;
 
         std::cout << "--------------------------" << std::endl;
@@ -239,7 +246,8 @@ std::string getPrescription(const matrix_t& matrix, const std::string& s1,
 
         std::cout << "Необходимо заменить символ " << s1[i - 1] << " на "
                   << s2[j - 1] << std::endl;
-        std::cout << "i = [" << i << "]" << ", j = [" << j << "]" << std::endl;
+        std::cout << "i-1 = [" << i - 1 << "]" << std::endl;
+        std::cout << "j-1 = [" << j - 1 << "]" << std::endl;
         std::cout << "Действие: R" << std::endl;
 
         std::cout << "--------------------------" << std::endl;
@@ -300,7 +308,8 @@ void getAllPrescriprions(const matrix_t& matrix, const std::string& s1,
       std::cout << "--------------------------" << std::endl;
 
       std::cout << "Символы совпадают: " << s1[i - 1] << std::endl;
-      std::cout << "i = [" << i << "]" << ", j = [" << j << "]" << std::endl;
+      std::cout << "i-1 = [" << i - 1 << "]" << std::endl;
+      std::cout << "j-1 = [" << j - 1 << "]" << std::endl;
       std::cout << "Действие: M" << std::endl;
       std::cout << "Текущее предписание: "
                 << currentPrescription.substr(0,
@@ -325,7 +334,8 @@ void getAllPrescriprions(const matrix_t& matrix, const std::string& s1,
       std::cout << "--------------------------" << std::endl;
 
       std::cout << "Необходимо удалить символ: " << s1[i - 1] << std::endl;
-      std::cout << "i = [" << i << "]" << ", j = [" << j << "]" << std::endl;
+      std::cout << "i-1 = [" << i - 1 << "]" << std::endl;
+      std::cout << "j-1 = [" << j - 1 << "]" << std::endl;
       std::cout << "Действие: D" << std::endl;
       std::cout << "Текущее предписание: "
                 << currentPrescription.substr(0,
@@ -350,7 +360,8 @@ void getAllPrescriprions(const matrix_t& matrix, const std::string& s1,
       std::cout << "--------------------------" << std::endl;
 
       std::cout << "Необходимо вставить символ: " << s2[j - 1] << std::endl;
-      std::cout << "i = [" << i << "]" << ", j = [" << j << "]" << std::endl;
+      std::cout << "i-1 = [" << i - 1 << "]" << std::endl;
+      std::cout << "j-1 = [" << j - 1 << "]" << std::endl;
       std::cout << "Действие: I" << std::endl;
       std::cout << "Текущее предписание: "
                 << currentPrescription.substr(0,
@@ -377,7 +388,8 @@ void getAllPrescriprions(const matrix_t& matrix, const std::string& s1,
 
       std::cout << "Необходимо заменить символ " << s1[i - 1] << " на "
                 << s2[j - 1] << std::endl;
-      std::cout << "i = [" << i << "]" << ", j = [" << j << "]" << std::endl;
+      std::cout << "i-1 = [" << i - 1 << "]" << std::endl;
+      std::cout << "j-1 = [" << j - 1 << "]" << std::endl;
       std::cout << "Действие: R" << std::endl;
       std::cout << "Текущее предписание: "
                 << currentPrescription.substr(0,
