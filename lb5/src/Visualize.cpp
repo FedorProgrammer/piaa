@@ -19,7 +19,7 @@ const char* color_green = "green";
 
 char* createVertexLabel(const Vertex& vertex, int vertexId) {
   char* buffer = new char[32];
-  
+
   if (vertex.symbol) {
     sprintf(buffer, "%d (%c)", vertexId, vertex.symbol);
   } else {
@@ -54,7 +54,7 @@ void addEdge(Agraph_t* g, Agnode_t* from, Agnode_t* to, const char* color,
 
   agsafeset(edge, (char*)"color", (char*)color, (char*)"");
   agsafeset(edge, (char*)"style", (char*)style, (char*)"");
-  
+
   if (label) agsafeset(edge, (char*)"label", (char*)label, (char*)"");
 }
 
@@ -63,7 +63,7 @@ void addEdge(Agraph_t* g, Agnode_t* from, Agnode_t* to, const char* color,
 void automatonToDot(Trie& trie, const std::string& filename) {
   GVC_t* gvc = gvContext();
   Agraph_t* g = agopen((char*)"AhoCorasick", Agdirected, nullptr);
-  
+
   agsafeset(g, (char*)"rankdir", (char*)"TB", (char*)"");
 
   std::vector<Agnode_t*> nodes;
@@ -74,8 +74,8 @@ void automatonToDot(Trie& trie, const std::string& filename) {
   for (int i = 0; i < trie.getVerticesCount(); ++i) {
     Vertex& v = trie.getVertex(i);
     for (auto& [sym, next] : v.next) {
-      char lbl[2] = {sym, '\0'};
-      addEdge(g, nodes[i], nodes[next], color_black, "solid", lbl);
+      char label[2] = {sym, '\0'};
+      addEdge(g, nodes[i], nodes[next], color_black, "solid", label);
     }
   }
 
