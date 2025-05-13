@@ -385,18 +385,18 @@ void buildAutomaton(Trie& trie, bool record) {
     std::cout << "--------------------------------" << std::endl;
   }
 
-  for (int i = 0; i < trie.getVerticesCount(); i++) {
+  for (int v = 0; v < trie.getVerticesCount(); v++) {
     if (record) {
-      std::cout << "Обработка вершины с индексом [" << i << "]" << std::endl;
+      std::cout << "Обработка вершины с индексом [" << v << "]" << std::endl;
       std::cout << "--------------------------------" << std::endl;
     }
 
-    getSuffixLink(trie, i, record);
+    getSuffixLink(trie, v, record);
 
-    getOutputLink(trie, i, record);
+    getOutputLink(trie, v, record);
 
     if (record) {
-      std::cout << "Вершина [" << i << "] обработана" << std::endl;
+      std::cout << "Вершина [" << v << "] обработана" << std::endl;
       std::cout << "--------------------------------" << std::endl;
     }
   }
