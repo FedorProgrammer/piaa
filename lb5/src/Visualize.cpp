@@ -86,7 +86,7 @@ void automatonToDot(Trie& trie, const std::string& filename) {
     }
   }
 
-  for (int i = 0; i < trie.getVerticesCount(); ++i) {
+  for (int i = 1; i < trie.getVerticesCount(); ++i) {
     if (trie.getVertex(i).outputLink != -1) {
       addEdge(g, nodes[i], nodes[trie.getVertex(i).outputLink], color_green,
               "solid");
