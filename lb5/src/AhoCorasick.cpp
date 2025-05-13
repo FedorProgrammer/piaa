@@ -385,7 +385,7 @@ void buildAutomaton(Trie& trie, bool record) {
     std::cout << "--------------------------------" << std::endl;
   }
 
-  for (int i = 0; i < trie.getVerticesCount(); ++i) {
+  for (int i = 0; i < trie.getVerticesCount(); i++) {
     if (record) {
       std::cout << "Обработка вершины с индексом [" << i << "]" << std::endl;
       std::cout << "--------------------------------" << std::endl;
