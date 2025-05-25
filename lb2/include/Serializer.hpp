@@ -2,14 +2,11 @@
 #define SERIALIZER_HPP_
 
 #include <nlohmann/json.hpp>
-
-struct Square;
-class Board;
+#include <vector>
 
 namespace serialize {
 
-nlohmann::json to_json(const Square& square);
-nlohmann::json to_json(const Board& board);
+nlohmann::json to_json(const std::vector<std::vector<double>>& matrix);
 
 }  // namespace serialize
 

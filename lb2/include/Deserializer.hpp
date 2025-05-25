@@ -2,14 +2,11 @@
 #define DESERIALIZER_HPP_
 
 #include <nlohmann/json.hpp>
-
-struct Square;
-class Board;
+#include <vector>
 
 namespace deserialize {
-                      
-Square get_square(const nlohmann::json& square_json);
-Board get_board(const nlohmann::json& board_json);
+
+std::vector<std::vector<double>> from_json(const nlohmann::json& matrix_json);
 
 }  // namespace deserialize
 
