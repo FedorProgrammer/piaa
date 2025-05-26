@@ -117,34 +117,29 @@ void runAlgorithm(const std::vector<std::vector<double>>& weights,
 
   std::cout << std::endl;
   std::cout << "================================" << std::endl;
-  std::cout << "Branch and boundary solutuion: [";
+  std::cout << "Branch and boundary solutuion: [ ";
 
   for (size_t i = 0; i < bnbPath.size(); i++) {
-    if (i < bnbPath.size() - 1) {
-      std::cout << bnbPath[i] << ' ';
-    } else {
-      std::cout << bnbPath[i] << ']' << std::endl;
-    }
+    std::cout << bnbPath[i] << ' ';
   }
 
-  std::cout << std::fixed << std::setprecision(1) << "bnb weight: [" << bnbWeight
-            << ']' << std::endl;
+  std::cout << ']' << std::endl;
+
+  std::cout << std::fixed << std::setprecision(1) << "bnb weight: ["
+            << bnbWeight << ']' << std::endl;
 
   auto [amrPath, amrWeight] = tsp::amrSearch(weights, stepMode);
 
   std::cout << "================================" << std::endl;
-  std::cout << "AMR solution: [";
+  std::cout << "AMR solution: [ ";
 
   for (size_t i = 0; i < amrPath.size(); i++) {
-    if (i < amrPath.size() - 1) {
-      std::cout << amrPath[i] << ' ';
-    } else {
-      std::cout << amrPath[i] << ']' << std::endl;
-    }
+    std::cout << amrPath[i] << ' ';
   }
+  std::cout << ']' << std::endl;
 
-  std::cout << std::fixed << std::setprecision(1) << "amr weight: [" << amrWeight
-            << ']' << std::endl;
+  std::cout << std::fixed << std::setprecision(1) << "amr weight: ["
+            << amrWeight << ']' << std::endl;
   std::cout << "accuracy: [" << amrWeight / bnbWeight << ']' << std::endl;
 }
 

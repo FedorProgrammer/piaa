@@ -102,6 +102,9 @@ double getHalfSumBound(const std::vector<std::vector<double>>& weights,
 
     std::cout << "[getHalfSumBound] enter" << std::endl;
     std::cout << "pieces count: [" << pieces.size() << "]" << std::endl;
+
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << std::endl;
   }
 
   for (size_t i = 0; i < pieces.size(); i++) {
@@ -246,17 +249,17 @@ void search(const std::vector<std::vector<double>>& weights,
     std::cout << "--------------------------------" << std::endl;
 
     std::cout << "[search] enter" << std::endl;
-    std::cout << "current path: [";
+    std::cout << "path: [ ";
     for (auto it = path.begin(); it != path.end(); it++) {
-      std::cout << *it << (std::next(it) != path.end() ? ' ' : ']');
+      std::cout << *it << ' ';
     }
-    std::cout << std::endl;
-    std::cout << "current weight: [" << currentWeight << "]" << std::endl;
-    std::cout << "remaining vertices: [";
+    std::cout << ']' << std::endl;
+    std::cout << "currentWeight: [" << currentWeight << "]" << std::endl;
+    std::cout << "remaining vertices: [ ";
     for (auto it = remaining.begin(); it != remaining.end(); it++) {
-      std::cout << *it << (std::next(it) != remaining.end() ? ' ' : ']');
+      std::cout << *it << ' ';
     }
-    std::cout << std::endl;
+    std::cout << ']' << std::endl;
 
     std::cout << "--------------------------------" << std::endl;
     std::cout << std::endl;
@@ -272,16 +275,26 @@ void search(const std::vector<std::vector<double>>& weights,
       std::cout << "[search] iteration" << std::endl;
       std::cout << "Complete path found! Total cost (with return): [" << total
                 << "]" << std::endl;
+      std::cout << "path: [ ";
+      for (auto it = path.begin(); it != path.end(); it++) {
+        std::cout << *it << ' ';
+      }
+      std::cout << ']' << std::endl;
     }
 
     if (total < bestWeight || (total == bestWeight && path < bestPath)) {
-      if (record) {
-        std::cout << "New best path found!" << std::endl;
-        std::cout << "Cost: [" << total << "]" << std::endl;
-      }
-
       bestPath = path;
       bestWeight = total;
+
+      if (record) {
+        std::cout << "New best path found!" << std::endl;
+        std::cout << "cost: [" << total << "]" << std::endl;
+        std::cout << "bestPath: [";
+        for (auto it = bestPath.begin(); it != bestPath.end(); it++) {
+          std::cout << *it << ' ';
+        }
+        std::cout << ']' << std::endl;
+      }
     }
 
     if (record) {
@@ -372,11 +385,11 @@ std::pair<std::vector<int>, double> bnbSearch(
 
     std::cout << "[bnbSearch]: enter" << std::endl;
     std::cout << "n (weights.size): [" << n << "]" << std::endl;
-    std::cout << "remaining vertices: [";
+    std::cout << "remaining vertices: [ ";
     for (auto it = remaining.begin(); it != remaining.end(); it++) {
-      std::cout << *it << (std::next(it) != remaining.end() ? ' ' : ']');
+      std::cout << *it << ' ';
     }
-    std::cout << std::endl;
+    std::cout << ']' << std::endl;
 
     std::cout << std::endl;
   }
@@ -387,12 +400,12 @@ std::pair<std::vector<int>, double> bnbSearch(
     std::cout << std::endl;
 
     std::cout << "[bnbSearch]: exit" << std::endl;
-    std::cout << "bestWeight: [" << bestWeight << std::endl;
-    std::cout << "bestPath: [";
+    std::cout << "bestWeight: [" << bestWeight << ']' << std::endl;
+    std::cout << "bestPath: [ ";
     for (auto it = bestPath.begin(); it != bestPath.end(); it++) {
-      std::cout << *it << (std::next(it) != bestPath.end() ? ' ' : ']');
+      std::cout << *it << ' ';
     }
-    std::cout << std::endl;
+    std::cout << ']' << std::endl;
 
     std::cout << "================================" << std::endl;
     std::cout << std::endl;
@@ -415,11 +428,11 @@ std::pair<std::vector<int>, double> amrSearch(
 
     std::cout << "[amrSearch]: enter" << std::endl;
     std::cout << "N (weights.size): [" << N << "]" << std::endl;
-    std::cout << "initialPath: [";
+    std::cout << "initialPath: [ ";
     for (auto it = bestPath.begin(); it != bestPath.end(); it++) {
-      std::cout << *it << (std::next(it) != bestPath.end() ? ' ' : ']');
+      std::cout << *it << ' ';
     }
-    std::cout << std::endl;
+    std::cout << ']' << std::endl;
     std::cout << "initialCost: [" << bestCost << "]" << std::endl;
 
     std::cout << std::endl;
@@ -489,11 +502,11 @@ std::pair<std::vector<int>, double> amrSearch(
         } else {
           std::cout << "No improvement possible for this city" << std::endl;
         }
-        std::cout << "Current path: [";
+        std::cout << "Current path: [ ";
         for (auto it = bestPath.begin(); it != bestPath.end(); it++) {
-          std::cout << *it << (std::next(it) != bestPath.end() ? ' ' : ']');
+          std::cout << *it << ' ';
         }
-        std::cout << std::endl;
+        std::cout << ']' << std::endl;
         std::cout << "Current cost: [" << bestCost << "]" << std::endl;
 
         std::cout << "--------------------------------" << std::endl;
@@ -522,11 +535,11 @@ std::pair<std::vector<int>, double> amrSearch(
     std::cout << "[amrSearch]: exit" << std::endl;
     std::cout << "iterations: [" << count << "]" << std::endl;
     std::cout << "bestCost: [" << bestCost << "]" << std::endl;
-    std::cout << "bestPath: [";
+    std::cout << "bestPath: [ ";
     for (auto it = bestPath.begin(); it != bestPath.end(); it++) {
-      std::cout << *it << (std::next(it) != bestPath.end() ? ' ' : ']');
+      std::cout << *it << ' ';
     }
-    std::cout << std::endl;
+    std::cout << ']' << std::endl;
 
     std::cout << "================================" << std::endl;
     std::cout << std::endl;
