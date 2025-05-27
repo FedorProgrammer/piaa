@@ -184,7 +184,8 @@ double getMSTBound(const std::vector<std::vector<double>>& weights,
     if (vertices.size() >= verticesCount) break;
 
     auto [weight, from, to] = arc;
-    if ((vertices.count(from) != vertices.count(to))) {
+    if ((vertices.count(from) != vertices.count(to)) ||
+        (vertices.count(from) == 0 && vertices.count(to) == 0)) {
       vertices.insert(from);
       vertices.insert(to);
       summ += weight;
