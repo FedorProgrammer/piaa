@@ -447,7 +447,7 @@ std::pair<std::vector<int>, double> amrSearch(
 
     std::vector<std::pair<double, size_t>> potentials;
     for (size_t i = 1; i < N; i++) {
-      int prev = bestPath[(i - 1 + N) % N];
+      int prev = bestPath[i - 1];
       int curr = bestPath[i];
       int next = bestPath[(i + 1) % N];
 
